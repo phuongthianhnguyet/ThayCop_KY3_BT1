@@ -10,11 +10,11 @@
 #### Truy cập vào website của nhà cung cấp Domain (Ví dụ: mắt bão, iNET,...)
 
 - Link website đăng ký: https://www.matbao.net/ten-mien/ten-mien-mien-phi.html
-- 
+  
 #### Nhập tên miền để kiểm tra xem đã tồn tại hay chưa, nếu đã tồn tại rồi thì phải đổi tên miền khác
 
 - Xác thực tài khoản
-- 
+  
 - Sau khi xác thực thành công, tên miền sẽ được đưa vào hàng đợi đăng ký, kiểm tra đủ điều kiện sẽ được kích hoạt
   
 ### 2. Đăng ký tài khoản Cloudfare.
@@ -42,8 +42,6 @@
 #### Sau khi đăng nhập vào, chọn tên miền -> quản lý tên miền
 
 #### Chọn quản lý chi tiết dịch vụ
-
-<img width="1914" height="1016" alt="image" src="https://github.com/user-attachments/assets/3c2ac811-4204-47ff-910a-0d2c59e5fe96" />
 
 #### Trong Servername chọn "Sử dụng Name Server tùy chỉnh" sau đó nhập 2 namespace của cloudfare vào -> Nhấn lưu thay đổi
 <img width="1915" height="950" alt="image" src="https://github.com/user-attachments/assets/05558b82-e7b7-43d1-a68f-12a08a9970db" />

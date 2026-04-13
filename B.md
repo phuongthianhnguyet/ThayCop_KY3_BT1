@@ -51,10 +51,30 @@ Các lệnh cần tìm hiểu:
 - Sau khi cài đặt xong, sử dụng lệnh hai lệnh dưới đây để kiểm tra phiên bản docker và docker compose vừa cài đặt
 ```docker --version
 docker-compose --version ```
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1f4af749-597c-4e60-a348-560b69b13d29" />
 
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/43b8449c-77a4-413a-8b61-c4836610226f" />
+ 
+### IV. Cấu hình để docker để chạy mà không cần tiền tố sudo
+#### Bước 1. Thêm user vào group docker
+- Sử dụng lệnh sudo usermod -aG docker $USER để thêm user vào group docker (thay $USER bằng tên người dùng của mình, ví dụ: thuha)
+- Sau khi đã thêm user vào group, ta cần đăng xuất ra và đăng nhập lại để quyền có hiệu lực. Hoặc có thể dùng lệnh newgrp docker để không cần thoát SSH ra để đăng nhập lại mà áp dụng quyền được luôn.
 
-#### IV. Cấu hình để docker để chạy mà không cần tiền tố sudo
+<img width="1920" height="1023" alt="image" src="https://github.com/user-attachments/assets/affc1000-245c-4592-828f-a2419a592f0a" />
+
+=> Kết quả sau khi cấu hình để docker chạy mà không cần tiền tố sudo
+
+#### V
+#### VI. Cấu hình tường lửa trên Ubuntu cho phép các cổng 80, 1880, 9630 (Lệnh: sudo ufw allow ...)
+- Chạy các lệnh sau trong cửa sổ powrshell của ubuntu để cho phép các cổng 80, 1880, 9630 hoạt động
+```sudo ufw allow 80/tcp
+sudo ufw allow 1880/tcp
+sudo ufw allow 9630/tcp```
+
+<img width="1920" height="1076" alt="image" src="https://github.com/user-attachments/assets/44420589-8833-474f-b88a-929a552115ff" />
+
+- Sau khi chạy xong 3 lệnh trên, chạy tiếp lệnh dưới đây để kích hoạt tường lửa:
+```sudo ufw enable```
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6b0e4722-000f-489c-ad6e-496a98e01ce0" />
 
 
 

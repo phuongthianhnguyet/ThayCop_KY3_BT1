@@ -25,6 +25,7 @@
 
 #### Sau khi đã tạo xong tài khoản, đăng nhập vào và chọn Domains -> add a site -> Nhập domain đã đăng ký vào -> continue
 
+
 <img width="959" height="540" alt="1" src="https://github.com/user-attachments/assets/df5234ea-97ad-4565-a46a-804ea955694c" />
 
 #### Chọn Free plan

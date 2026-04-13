@@ -18,9 +18,11 @@
 - Chạy docker-compose lần đầu để Node-RED tự sinh file cấu hình trong thư mục ./nodered, sau đó mới tiến hành sửa settings.js và restart lại container
 ## BÀI LÀM
 #### 1. Sử dụng lệnh sau để tạo thư mục ~/myapp và chuyển vào trong thư mục đã tạo để tạo các thư mục con:
-```mkdir -p ~/myapp
+```
+mkdir -p ~/myapp
 cd ~/myapp
-mkdir myweb nginx nodred```
+mkdir myweb nginx nodred
+```
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1fabc1ee-285d-4635-8aba-1b45f79adaa0" />
 
@@ -28,7 +30,8 @@ mkdir myweb nginx nodred```
 
 - Tạo file ./myweb/index.html
 - Sử dụng lệnh nano ~/myapp/myweb/index.html để viết nội dung file. Sau khi viết xong nội dung file, nhấn phím Ctrl+O để lưu nội dung file, và tổ hợp phím Ctrl+X để thoát nano.
-```<!DOCTYPE html>
+```
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -125,83 +128,95 @@ mkdir myweb nginx nodred```
 </div>
 
 </body>
-</html>```
+</html>
+```
 
 #### 3. Tạo file docker-compose.yml
 - Sử dụng lệnh nano docker-compose.yaml để tạo file docker-compose.yml
 - Viết khối lệnh dưới đây vào trong file docker-compose.yml
-```version: '3.8'
+```
+version: '3.8'
 
 services:
-  # Dịch vụ Node-RED
-  nodered:
-    image: nodered/node-red
-    container_name: my-nodered
+  node-red:
+    image: nodered/node-red:latest
+    container_name: node-red
     ports:
       - "1880:1880"
     volumes:
       - ./nodered:/data
 
-  # Dịch vụ Nginx
-  webserver:
+  nginx:
     image: nginx:latest
-    container_name: my-nginx
+    container_name: nginx-server
     ports:
       - "80:80"
     volumes:
       - ./myweb:/myweb
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
-      - nodered```
+      - node-red
+```
 - Gõ lệnh ls hoặc cat docker-compose.yml để kiểm tra file docker-compose.yml vừa tạo
 <img width="1920" height="1076" alt="image" src="https://github.com/user-attachments/assets/11316b62-0a07-4350-90da-36b8aed5ac60" />
+
 #### 4. Cấu hình cho nginx (nginx/nginx.conf)
 - Cấu hình cho nginx như sau:
-
 ```
-events {
-    worker_connections 1024;
-}
+events {}
 
 http {
-    # Thiết lập các kiểu file (giúp trình duyệt hiểu file CSS/JS)
-    include       /etc/nginx/mime.types;
-    default_type  application/octet-stream;
-
     server {
         listen 80;
-        
-        # Thay 'mysub.local' bằng sub-domain tùy ý của bạn
-        server_name mysub.local; 
+        server_name nguyet_sub.local;
 
-        # YÊU CẦU: location / trỏ tới root là thư mục /myweb
         location / {
             root /myweb;
             index index.html;
-            try_files $uri $uri/ =404;
         }
 
-        # YÊU CẦU: location /api dùng proxy_pass trỏ tới nodered
-        location /api/ {
-            # 'nodered' là tên service bạn đặt trong docker-compose.yml
-            proxy_pass http://nodered:1880/;
-            
-            # Các thiết lập header để proxy hoạt động ổn định
+        location /api {
+            proxy_pass http://node-red:1880;
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header X-Forwarded-Proto $scheme;
-
-            # Hỗ trợ WebSocket cho Node-RED
-            proxy_http_version 1.1;
-            proxy_set_header Upgrade $http_upgrade;
-            proxy_set_header Connection "upgrade";
         }
     }
 }
 ```
 
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/3522e867-a86c-4af6-ac80-1eb9e09864d2" />
-#### 5. Khởi chạy hệ thống
-Chạy lệnh sau để chạy docker:
+### 5. Khởi chạy hệ thống
+#### Chạy lệnh
+```
 docker-compose up -d
+```
+#### Nodered sẽ tự tạo ```file settings.js```
+Cấu hình lại file ```settings.js``` để đăng nhập:
+- Mở file ```settings.js``` bỏ dấu // ở đầu đoạn ```adminAuth:{}```
+```
+   adminAuth: {
+        type: "credentials",
+        users: [{
+            username: "admin",
+            password: "$2a$08$zZWtXTja0fB1pzD4sHCMyOCMYz2Z6dNbM6tl8sJogENOMcxWV9DN.",
+            permissions: "*"
+        }]
+    },
+```
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1e987f6d-5270-4f2e-b1fb-1495a82ab3b3" />
+
+#### Sau khi cấu hình lại file settings.js, restart lại để áp dụng các thay đổi
+```
+docker-compose restart
+```
+
+### 6. Kiểm tra kết quả
+Truy cập Node-RED: http://192.168.126.131:1880
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b9d02e10-8793-4bce-89de-c2cb53b7ef34" />
+
+Truy cập web: http://192.168.126.131:80
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/3bd35523-7aaa-4d99-8d52-f30338253896" />
+
+
+
+
+

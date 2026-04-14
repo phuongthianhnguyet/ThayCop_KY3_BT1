@@ -10,7 +10,7 @@ Nếu có lỗi xảy ra trong quá trình triển khai, sử dụng lệnh sau 
 ```
 docker-compose ps
 ```
-
+<img width="1918" height="912" alt="image" src="https://github.com/user-attachments/assets/6361be03-ac1e-4c8b-92a3-84a49a406d9e" />
 
 Nếu cột STATUS hiện Exit... hoặc Restarting, nghĩa là service đó đang lỗi.
 
@@ -47,6 +47,7 @@ Sau khi cấu hình và chạy lại doker, dùng lệnh dưới  đây để xe
 ```
 docker compose stats
 ```
+<img width="1363" height="314" alt="image" src="https://github.com/user-attachments/assets/f9c60318-c1ba-4ab4-b3f2-4a5b099da557" />
 
 
 

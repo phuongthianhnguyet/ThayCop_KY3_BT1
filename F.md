@@ -45,7 +45,7 @@ node-red:
 ## 4. Quan sát hiệu năng thực tế
 Sau khi cấu hình và chạy lại doker, dùng lệnh dưới  đây để xem các containẻ đang dùng bao nhiêu tài nguyên
 ```
-docker compose stats
+docker stats
 ```
 <img width="1363" height="314" alt="image" src="https://github.com/user-attachments/assets/f9c60318-c1ba-4ab4-b3f2-4a5b099da557" />
 

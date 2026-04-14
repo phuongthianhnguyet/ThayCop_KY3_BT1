@@ -192,11 +192,16 @@ http {
 ```
 docker-compose up -d
 ```
-#### Nodered sẽ tự tạo ```file settings.js
+#### Nodered sẽ tự tạo 
 ```
-Cấu hình lại file ```settings.js``` để đăng nhập:
-- Mở file ```settings.js``` bỏ dấu // ở đầu đoạn ```adminAuth:{}
+file settings.js
 ```
+Cấu hình lại file 
+```
+settings.js
+```
+ để đăng nhập:
+- Mở file ```settings.js``` bỏ dấu // ở đầu đoạn ```adminAuth:{}```
 ```
    adminAuth: {
         type: "credentials",

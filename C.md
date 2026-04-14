@@ -17,7 +17,9 @@
 7. Edit file ./nodered/settings.js để nodered bắt buộc đăng nhập
 - Chạy docker-compose lần đầu để Node-RED tự sinh file cấu hình trong thư mục ./nodered, sau đó mới tiến hành sửa settings.js và restart lại container
 ## BÀI LÀM
+
 #### 1. Sử dụng lệnh sau để tạo thư mục ~/myapp và chuyển vào trong thư mục đã tạo để tạo các thư mục con:
+
 ```
 mkdir -p ~/myapp
 cd ~/myapp
@@ -158,6 +160,7 @@ services:
       - node-red
 ```
 - Gõ lệnh ls hoặc cat docker-compose.yml để kiểm tra file docker-compose.yml vừa tạo
+  
 <img width="1920" height="1076" alt="image" src="https://github.com/user-attachments/assets/11316b62-0a07-4350-90da-36b8aed5ac60" />
 
 #### 4. Cấu hình cho nginx (nginx/nginx.conf)
@@ -189,9 +192,11 @@ http {
 ```
 docker-compose up -d
 ```
-#### Nodered sẽ tự tạo ```file settings.js```
+#### Nodered sẽ tự tạo ```file settings.js
+```
 Cấu hình lại file ```settings.js``` để đăng nhập:
-- Mở file ```settings.js``` bỏ dấu // ở đầu đoạn ```adminAuth:{}```
+- Mở file ```settings.js``` bỏ dấu // ở đầu đoạn ```adminAuth:{}
+```
 ```
    adminAuth: {
         type: "credentials",
@@ -201,6 +206,7 @@ Cấu hình lại file ```settings.js``` để đăng nhập:
             permissions: "*"
         }]
     },
+    
 ```
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1e987f6d-5270-4f2e-b1fb-1495a82ab3b3" />
 
@@ -210,10 +216,12 @@ docker-compose restart
 ```
 
 ### 6. Kiểm tra kết quả
-Truy cập Node-RED: http://192.168.126.131:1880
+- Truy cập Node-RED: http://192.168.126.131:1880
+
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b9d02e10-8793-4bce-89de-c2cb53b7ef34" />
 
-Truy cập web: http://192.168.126.131:80
+- Truy cập web: http://192.168.126.131:80
+
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/3bd35523-7aaa-4d99-8d52-f30338253896" />
 
 

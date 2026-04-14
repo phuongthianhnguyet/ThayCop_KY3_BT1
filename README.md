@@ -32,4 +32,4 @@
   
 ## G. Câu hỏi.
 
--https://github.com/phuongthianhnguyet/ThayCop_KY3_BT1/blob/main/G_cauhoi.md
+- https://github.com/phuongthianhnguyet/ThayCop_KY3_BT1/blob/main/G_cauhoi.md

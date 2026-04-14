@@ -40,5 +40,43 @@ Tất cả đều chạy ok
 #### 4. Tạo API đơn giản trên Node-RED
 <img width="1919" height="1080" alt="image" src="https://github.com/user-attachments/assets/81db45c9-f308-49dd-9464-cd24fa03f22e" />
 
+#### 5. Sửa file index.html để sử dụng được api đã khai báo proxy_pass
+Thêm đoạn script sau vào file index.html
+```
+<script>
+    async function callNodeRed() {
+        const resultDiv = document.getElementById('api-result');
+        resultDiv.innerText = "Đang kết nối...";
 
-#### 5. Sửa file
+        try {
+            /* Lưu ý: Nginx đã cấu hình proxy_pass /api -> Node-RED.
+               Vì vậy trình duyệt gọi /api/hello sẽ được Nginx đẩy sang Node-RED /hello
+            */
+            const response = await fetch('/api/hello');
+
+            if (!response.ok) {
+                throw new Error('Không thể kết nối API (Lỗi Nginx hoặc Node-RED)');
+            }
+
+            const data = await response.json();
+
+            // Hiển thị dữ liệu trả về từ Node-RED
+            // Giả sử Node-RED trả về JSON dạng: {"msg": "Chào Nguyệt!"}
+            resultDiv.innerText = data.msg || JSON.stringify(data);
+            resultDiv.style.color = "#00ffea";
+
+        } catch (error) {
+            console.error("Error:", error);
+            resultDiv.innerText = "Lỗi: " + error.message;
+            resultDiv.style.color = "#ff4d4d";
+        }
+    }
+</script>
+```
+Kiểm tra kết quả: 
+- Truy cập: http://192.168.126.131:1880/hello
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9ccea892-e3e1-456b-a4bb-4affdaae594a" />
+
+- Truy cập: http://192.168.126.131/
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6323d1fc-641a-4ae1-9627-5353d2574806" />
+
